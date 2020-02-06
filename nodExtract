@@ -1,0 +1,89 @@
+#! /usr/bin/env python3
+
+#  usage:   $ dynarun jobname 
+#  script needs an emptyfile in remote root:  $: touch opencheck
+
+import sys
+import pandas as pd
+
+    
+def writeNodeFile(r1, flist):
+    '''
+    reads the inp-file and extracts the nodes.
+
+    The outcome is a csv-file: nodes.csv.
+    The csv file have columns nodenumber and the xyz coordinates
+    '''
+    fut = open('nodes.csv', 'w')
+    rc = r1 + 1
+    reslist = []
+
+    headString = 'nod,x,y,z\n'
+    fut.write(headString)
+    
+    while '*' not in flist[rc]:
+        str1 = flist[rc].replace(' ', '')
+        fut.write(str1)
+        rc += 1
+        
+    fut.close()
+    return
+
+
+def writeNsetFile(rs, flist):
+    '''
+    writes the csv-file: nsets.csv.
+    The collumns are the nset-name.
+    Empty spaces are fille with a zero.
+    '''
+    # fut = open('nsets.csv', 'w')
+    nsetdict = {}
+    for nsr in rs:
+        nsetName = flist[nsr][:-1].split('=')[1]
+        nslist = []
+        rc = nsr + 1
+        while ('*' not in flist[rc]) and (rc < len(flist)-1):
+            strq = flist[rc].replace(' ','')
+            rl = strq.split(',')
+            nslist.extend(rl[:-1])
+            rc += 1
+        if rc == len(flist)-1:
+            strq = flist[rc].replace(' ','')
+            rl = strq.split(',')
+            nslist.extend(rl[:-1])
+        nsetdict[nsetName] = nslist
+
+    # print(nsetdict)
+    df = pd.DataFrame({key: pd.Series(value) for key, value in nsetdict.items()})
+    df.to_csv('nsets.csv', encoding='utf-8', index=False)
+
+    return
+    
+
+    
+if len(sys.argv)==2:
+    filename = sys.argv[1]
+    fin = open(filename, 'r')
+    fillist = fin.readlines()
+    fin.close()
+    r = -1
+    
+    nSets = []
+    for item in fillist:
+        r += 1
+        if '*NODE' in item:
+            nline = r
+        if '*NSET' in item:
+            nSets.append(r)
+
+    writeNodeFile(nline, fillist)
+    writeNsetFile(nSets, fillist)
+
+else:
+    print(' ')
+    print("Anvandning:")
+    print(" nelExtract.py mesh.inp")
+    print("mesh.inp is the file that contains the mesh for ccx")
+    print("Perhaps from salome converted with unv2ccx")
+    print(" ")
+ 
