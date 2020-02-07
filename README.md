@@ -21,11 +21,11 @@ Some scripts that is usable when running CalculiX and salome
         resultExtract jobfile.frd
 
 Now you easily can import into python (or other) for easy processing
-ald plotting
+and plotting
 
 ### unv2ccx
 
-A fantastic tool witten by Ihor Mirzov. Thanks Ihor!
+A fantastic tool written by Ihor Mirzov. Thanks Ihor!
 
 Note! unv2ccx is a GPL-v3 licensed code. The source code can be found at:
 
@@ -50,4 +50,9 @@ post-processing in python.
 ### nodExtract
 
 Writes the node info and nodsets to csv-files
+
+### install.sh
+
+A simple installer. Just copies the files to ~/bin and maes them
+executable. Run from this directory.
 
