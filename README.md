@@ -41,15 +41,26 @@ Removes 1D and 2D elements from the input file. Netgen uses these
 when constructing the solid mesh.
 
 
-
 ### resultExtract
 
 Extracts the results in the frd-file to csv-files. Convenient when
 post-processing in python.
 
+
+
 ### nodExtract
 
 Writes the node info and nodsets to csv-files
+
+
+### surfSet
+
+Creates a file with the surfaces defind. The element sets from
+salome are used. Only TET-mesh is accepted. 
+
+    surfSet <name>.inp
+
+gives a file  <name>S.inp
 
 ### install.sh
 
