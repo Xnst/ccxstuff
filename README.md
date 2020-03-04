@@ -12,6 +12,10 @@ Some scripts that is usable when running CalculiX and salome
 - Strip of all non 3d meshes (if preferred)
 
         only3d Mesh.inp mesh3d.inp
+      
+- If surfaces is needed, for contact or CFD
+
+        surfSet Mesh.inp
 
 - make jobfile.inp
 - run simulation
@@ -58,9 +62,9 @@ Writes the node info and nodsets to csv-files
 Creates a file with the surfaces defind. The element sets from
 salome are used. Only TET-mesh is accepted. 
 
-    surfSet <name>.inp
+    surfSet filename.inp
 
-gives a file  <name>S.inp
+gives a file  filenameS.inp
 
 ### install.sh
 
