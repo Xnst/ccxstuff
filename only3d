@@ -12,7 +12,15 @@ if len(sys.argv)==3:
     for line in fin:
         if 'B31' in line:
             skriv = False
+        if 'B32' in line:
+            skriv = False
+        if 'CPS3' in line:
+            skriv = False
+        if 'CPS6' in line:
+            skriv = False
         if 'C3D4' in line:
+            skriv = True
+        if 'C3D10' in line:
             skriv = True
         if skriv:
             fut.write(line)
